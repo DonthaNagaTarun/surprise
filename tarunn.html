@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You Sravvv 💜</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8e8ff, #ffe4f4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #8a2be2;
+      margin-bottom: 10px;
+      z-index: 2;
+    }
+
+    p {
+      color: #555;
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      z-index: 2;
+    }
+
+    button {
+      background-color: #8a2be2;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      z-index: 2;
+    }
+
+    button:hover {
+      background-color: #9b4dff;
+      transform: scale(1.05);
+    }
+
+    /* Locked message */
+    #locked {
+      color: gray;
+      font-style: italic;
+      margin-top: 10px;
+      z-index: 2;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -10px;
+      color: #ff6bcb;
+      font-size: 20px;
+      animation: floatUp 5s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h2>Hey Sravvv 💖</h2>
+  <p>I made something small and sweet for you 🌸<br>Click below to see 🙈</p>
+
+   <!-- Button -->
+  <button id="first-link">Click to see 🙈</button>
+  <div id="locked" style="color: gray; font-style: italic; margin-top: 10px;">
+  </div>
+
+  <script>
+    // Floating hearts animation
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerText = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 400);
+
+    // Convert to IST
+    function getISTTime() {
+      const now = new Date();
+      const istOffset = 5.5 * 60; // minutes offset
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      return new Date(utc + istOffset * 60000);
+    }
+
+    // Button click behavior
+    document.getElementById("first-link").addEventListener("click", function() {
+      const istTime = getISTTime();
+
+      // Calculate tonight's midnight IST
+      const nextMidnightIST = new Date(istTime);
+      nextMidnightIST.setHours(0, 0, 0, 0);
+      nextMidnightIST.setDate(nextMidnightIST.getDate() + 1);
+
+      if (istTime < nextMidnightIST) {
+        alert("This will open after midnight (12 AM IST) 💫");
+      } else {
+        window.location.href = "https://birthdayy-ochre.vercel.app";
+      }
+    });
+  </script>
